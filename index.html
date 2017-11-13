@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas drawing - Simon Boerrigter</title>
+    <script src="js/script.js" charset="utf-8"></script>
+    <style media="screen">
+      * {
+        margin: 0;
+      }
+      #canvas {
+        border: 2px solid black;
+      }
+      input {
+        width: 50%;
+      }
+      span {
+        word-wrap: break-word;
+      }
+      canvas:hover {
+        cursor: url("http://www.rw-designer.com/oce/res/pencil.png"), auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Project informatie Simon Boerrigter MD2B</h1>
+    <p>Ik ga een teken programma maken dat je het kan downloaden of opslaan op een database.</p>
+    <br>
+    <p>TODO:</p>
+    <ul>
+      <li>Canvas</li>
+      <li>Movement bekijken op canvas</li>
+      <li>Eventlistener gebruiken</li>
+      <li>Gemaakte tekening opslaan en krijg je een link terug (gebruiker moet dat linkje bewaren) om te bewerken <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank">[IndexedDB]</a></li>
+      <li>In de database word er <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL">[toDataURL]</a> gebruikt</li>
+      <li>(Optioneel) Compress url van canvas data met <a href="https://www.npmjs.com/package/lzwcompress">[lzwcompress]</a></li>
+      <li>(Optioneel) Bewerken</li>
+      <li>(Optioneel) Kleuren</li>
+      <li>(Optioneel) downloaden</li>
+    </ul>
+    <br>
+    <h3>Ongeveer functionaliteit <a href="js/script.js">[zie javascript bestand]</a></h3>
+    <canvas id="canvas"></canvas>
+    <br>
+    <input type="color" id="color" value="#000000">
+    <br>
+    <button id="save">Save picture</button>
+    <button id="download">Download picture</button>
+    <br>
+    <span id="urlImage"></span>
+  </body>
+</html>
