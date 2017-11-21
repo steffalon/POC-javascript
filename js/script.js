@@ -19,7 +19,7 @@ window.addEventListener("load", function load(event) {
     //White background
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-
+    //GET url ?data value.
     if (url.searchParams.get("data")) {
         JsStore.isDbExist(DbName,function(isExist){
             if(isExist) {
@@ -31,11 +31,13 @@ window.addEventListener("load", function load(event) {
                     },
                     OnSuccess:function (results){
                         if (results[0] !== undefined) {
+                            //Get data
                             let Unparse = JSON.parse(results[0].data);
+                            //Uncompress data
                             Unparse = lzwCompress.unpack(Unparse);
                             function drawDataURIOnCanvas(strDataURI, canvas) {
                                 "use strict";
-                                var img = new window.Image();
+                                let img = new window.Image();
                                 img.addEventListener("load", function () {
                                     canvas.getContext("2d").drawImage(img, 0, 0);
                                 });
@@ -47,7 +49,7 @@ window.addEventListener("load", function load(event) {
                         }
                     },
                     OnError:function (error) {
-                        console.error("Something went wrong..")
+                        console.error("Something went wrong..");
                     }
                 });
             } else {
@@ -80,7 +82,7 @@ window.addEventListener("load", function load(event) {
     save.addEventListener('click', () => {
       dataCanvas = canvas.toDataURL('image/jpeg', 1.0); //Save image in url base64 format
       dataCanvas = lzwCompress.pack(dataCanvas); //Test result
-        JsStore.isDbExist(DbName,function(isExist){
+      JsStore.isDbExist(DbName,function(isExist){
             if(isExist)
             {
                 Connection.openDb(DbName);
@@ -90,7 +92,7 @@ window.addEventListener("load", function load(event) {
             else
             {
                 console.log('Db does not exist - creating..');
-                var table={
+                let table={
                     Name: 'imgTable',
                     Columns:[{
                         Name: 'data',
@@ -103,7 +105,7 @@ window.addEventListener("load", function load(event) {
                         DataType: 'string'
                 }]
                 }
-                var db = {
+                let db = {
                     Name: DbName,
                     Tables: [table]
                 }
@@ -125,17 +127,22 @@ window.addEventListener("load", function load(event) {
 }, false);
 
 
+//Toevoegen in database
 function database(Connection, dataCanvas) {
+    //Random url generator
     function randomString(length, chars) {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        let result = '';
+        for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
         return result;
     }
-    var urlData = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    var value={
+    //Get generated url
+    let urlData = randomString(16, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    //values that will be inserted
+    let value={
         data:JSON.stringify(dataCanvas), 
         url:urlData
     }
+    //insert values
     Connection.insert({
         Into: 'imgTable',
         Values: [value],//you can insert multiple values at a time
