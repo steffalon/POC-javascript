@@ -2,7 +2,8 @@
 
 WEBSITE: http://22257.hosts.ma-cloud.nl/bewijzenmap/p2.1/fro/poc/
 
-Project informatie Simon Boerrigter MD2B
+Project informatie:
+Simon Boerrigter MD2B
 Ik ga een teken programma maken dat je het kan downloaden of opslaan op een database.
 
 TODO:
